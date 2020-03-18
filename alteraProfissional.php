@@ -91,11 +91,11 @@
         <hr />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 30%;">
             <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-danger">Cancelar</button>
+              <input type="button" class="btn btn-danger" value="Cancelar">
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">
-            </div>  
+            </div>   
         </div>
         <hr />
     </form>

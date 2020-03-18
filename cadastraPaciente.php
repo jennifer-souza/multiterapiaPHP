@@ -1,46 +1,12 @@
 <?php 
-    require_once 'classes/paciente.php';
-    $u = new Usuario;
+
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <title>Multiterapia</title>
-    <link rel="stylesheet" href="css/style.css">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-</head>
+<?php include('head.html'); ?>
 <body>
-    <nav class="navbar navbar-expand-sm bg-light">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Cadastros</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Consultas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Agendamentos</a>
-        </li>
-      </ul>
-      <div></div>
-      <nav>
-        <ul class="navbar-nav">
-          <li> </li>
-          <li> </li>
-          <li> </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sair.php"><strong>Sair</strong></a>
-          </li>
-        </ul>
-      </nav>
-    </nav>
+<?php include('header.html'); ?>
     <form action="cadastroPaciente.php" class="prof" method="POST">
         <hr />
         <h2>Novo paciente</h2>
@@ -124,82 +90,13 @@
         <hr />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 30%;">
             <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-danger">Cancelar</button>
+              <input type="button" class="btn btn-danger" value="Cancelar">
             </div>
             <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-success">Salvar</button>
-            </div>  
+              <input type="submit" class="btn btn-success" value="Salvar">
+            </div>    
         </div>
         <hr />
     </form>
-<!--    <?php
-     //verifica se clicou no botão
-      if(isset($_POST['nome_paciente']))
-        {
-          //addslashes impede comandos maliciosos para hackear sites
-        $nome = addslashes($_POST['nome_paciente']);
-        $crm = addslashes($_POST['crm_paciente']);
-        $celular = addslashes($_POST['cel_paciente']);
-        $email = addslashes($_POST['email_paciente']);
-        $senha = addslashes($_POST['senha_paciente']);
-        $confirmarSenha = addslashes($_POST['confSenha']);
-
-        //verifica se está preenchido
-        if(!empty($nome) && !empty($crm) && !empty($celular) && 
-          !empty($email) && !empty($senha) && !empty($confirmarSenha))
-          {
-            //conexão com o banco e verificação/exibição de msg erro/confirmação
-            $u->conectar("multiterapiabd","localhost","root","");
-            //variável msgErro está na classe_paciente
-            if($u->msgErro == "")
-            {
-              if($senha == $confirmarSenha)
-              {
-                if($u->cadastrar($nome,$crm,$celular,$email,$senha))
-                {
-                  ?>
-                    <div id="msg-sucesso">
-                      Cadastrado com sucesso! Faça o login para entrar. 
-                        <a href="index.php"><strong>Clique aqui!</strong></a>
-                    </div>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                    <div class="msg-erro">
-                      Email já cadastrado!
-                    </div>
-                  <?php
-                }
-              }
-              else
-              {
-                ?>
-                  <div class="msg-erro">
-                    Senha e Confirmar senha não correspondem
-                  </div>
-                <?php
-              }
-            }
-            else
-            {
-              ?>
-                <div class="msg-erro">
-                  <?php echo "Erro: ".$u->msgErro; ?>
-                </div>
-              <?php
-            }
-          }
-          else
-          {
-              ?>
-                <div class="msg-erro">
-                  Preencha todos os campos!
-                </div>
-              <?php
-          }
-        }
-      ?> -->
 </body>
 </html>

@@ -2,14 +2,14 @@
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
       include('classes/conexao.php');
-      $nome = $_POST["nome_profissional"];
-      $licenca = $_POST["licenca_atuacao"];
-      $cpf = $_POST["cpf_profissional"];
-      $rg = $_POST["rg_profissional"];
-      $email = $_POST["email_profissional"];
-      $celular = $_POST["celular_profissional"];
-      $area = $_POST["area_atuacao"];
-      $dataC = $_POST["dt_cad_profissional"];
+      $nome = addslashes($_POST["nome_profissional"]);
+      $licenca = addslashes($_POST["licenca_atuacao"]);
+      $cpf = addslashes($_POST["cpf_profissional"]);
+      $rg = addslashes($_POST["rg_profissional"]);
+      $email = addslashes($_POST["email_profissional"]);
+      $celular = addslashes($_POST["celular_profissional"]);
+      $area = addslashes($_POST["area_atuacao"]);
+      $dataC = addslashes($_POST["dt_cad_profissional"]);
       $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', '" . $licenca . "' ,'" . $cpf . "', '" . $rg . "', '" . $email . "' , '" . $celular . "' , '" . $area . "', '" . $dataC . "')";
       //echo ($sql);
       mysqli_query($link, $sql);
@@ -82,11 +82,11 @@
         <hr />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 30%;">
             <div class="btn-group mr-2" role="group">
-              <button type="button" class="btn btn-danger">Cancelar</button>
+              <input type="button" class="btn btn-danger" value="Cancelar">Cancelar
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">
-            </div>  
+            </div>   
         </div>
         <hr />
     </form>
