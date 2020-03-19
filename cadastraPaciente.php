@@ -1,5 +1,32 @@
 <?php 
 
+   if($_SERVER['REQUEST_METHOD'] === 'POST'){
+
+      include('classes/conexao.php');
+
+      $nome = $_POST["nome_paciente"];
+      $cpf = $_POST["cpf_paciente"];
+      $rg = $_POST["rg_paciente"];
+      $dataN = $_POST["dt_nasc_paciente"];
+      $profissao = $_POST["profissao_paciente"];
+      $logadouro = $_POST["logadouro_paciente"];
+      $numero = $_POST["numero_paciente"];
+      $bairro = $_POST["bairro_paciente"];
+      $cidade = $_POST["cidade_paciente"];
+      $cep = $_POST["cep_paciente"];
+      $uf = $_POST["uf_paciente"];
+      $telefone = $_POST["telefone_paciente"];
+      $celular = $_POST["celular_paciente"];
+      $email = $_POST["email_paciente"];
+      $dataC = $_POST["dt_cad_paciente"];
+
+      $sql = "INSERT INTO tb_paciente VALUES('','" . $nome . "', '" . $cpf . "', '" . $rg . "', '" . $dataN . "', '" . $profissao . "', '" . $logadouro . "', '" . $numero . "', '" . $bairro . "', '" . $cidade . "', '" . $cep . "', '" . $uf . "', '" . $telefone . "', '" . $celular . "', '" . $email . "', '" . $dataC . "')";
+      echo ($sql);
+      mysqli_query($link, $sql);
+      ?>
+      <script type="text/javascript">location.replace("listaPaciente.php")</script>
+      <?php
+   }
 ?>
 
 <!DOCTYPE html>
@@ -7,12 +34,12 @@
 <?php include('head.html'); ?>
 <body>
 <?php include('header.html'); ?>
-    <form action="cadastroPaciente.php" class="prof" method="POST">
+    <form action="cadastraPaciente.php" class="prof" method="POST">
         <hr />
-        <h2>Novo paciente</h2>
+          <h2>Novo paciente</h2>
         <hr />
         <div class="row">
-            <div class="form-group col-md-6 name="nome_paciente">
+            <div class="form-group col-md-6" name="nome_paciente">
                 <label for="name">Nome:</label>
                 <input type="text" class="form-control" name="nome_paciente">
             </div>
@@ -38,7 +65,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6 name="logadouro_paciente">
+            <div class="form-group col-md-6" name="logadouro_paciente">
                 <label for="name">Logadouro(Ex: Rua, Avenida):</label>
                 <input type="text" class="form-control" name="logadouro_paciente">
             </div>
@@ -90,7 +117,7 @@
         <hr />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 30%;">
             <div class="btn-group mr-2" role="group">
-              <input type="button" class="btn btn-danger" value="Cancelar">
+              <input type="submit" class="btn btn-danger" value="Cancelar">
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">
