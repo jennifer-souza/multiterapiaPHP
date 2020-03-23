@@ -7,14 +7,24 @@ body{
   height: 100%;
   width: 100%;
   background-image:url(../images/background.jpg);
-  background-position: center;
+  background-position: relative;
   background-size: cover;
   position: relative;
 
 }
 .form-box{
   width: 400px;
-  height: 230px;
+  height: 260px;
+  position: relative;
+  margin: 6% auto;
+  background: #fff;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: 15px;
+}
+.form-box-cadastrar{
+  width: 400px;
+  height: 412px;
   position: relative;
   margin: 6% auto;
   background: #fff;
@@ -72,6 +82,15 @@ a:hover{
   transition: .5s;
   display: block;
 }*/
+.prof{
+  width: 80%;
+  height: 80%;
+  position: relative;
+  margin: 6% auto;
+  border-left: 1%;
+  overflow: hidden;
+  display: block;
+}
 ::-webkit-input-placeholder{
   color: #999;
 }
@@ -81,27 +100,22 @@ a:hover{
 ::-ms-input-placeholder{
   color: #999;
 }
-div#msg-sucesso{
-  width: 390px;
+#msg-sucesso{
+  width: 30%;
   margin: 0px auto;
+  margin-top: -140px;
   padding: 10px;
   background-color: rgba(50,205,50,.3);
   border: 1px solid rgb(34,139,34);
 }
 
-div.msg-erro{
-  width: 390px;
+.msg-erro{
+  width: 30%;
   margin: 5px auto;
+  margin-top: -140px;
   padding: 10px;
   background-color: rgba(250, 128,114, .3);
   border: 1px solid rgb(165, 42, 42);
-}
-.prof{
-  width: 80%;
-  height: 80%;
   position: relative;
-  margin: 6% auto;
-  border-left: 1%;
-  overflow: hidden;
   display: block;
 }

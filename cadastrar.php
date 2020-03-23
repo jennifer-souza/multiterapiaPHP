@@ -1,59 +1,73 @@
-<!DOCTYPE html>
 <?php 
-  require_once 'classes/usuarios.php';
-  $u = new Usuario;
+    require_once 'classes/validaLogin.php';
+    $u = new Usuario;
 ?>
+
+<!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="utf-8" />
-    <title>Cadastro - Multiterapia</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
+  <?php include('head.html'); ?>
   <body>
-    <div class="corpo-form-Cad">
-        <div class="form-box">
-            <div id="title">
-              <h2>Cadastro</h2> 
-            </div>
-            <div class="form-in-form">
-                <div>
-                    <form method="POST">
-                      <input name="nome_usuario" type="text" class="input-field" placeholder="Nome Completo" maxlength="50">
-                      <input name="crm_usuario" type="text" class="input-field" placeholder="CRM" maxlength="20">  
-                      <input name="cel_usuario" type="text" class="input-field" placeholder="Celular"  maxlength="20">
-                      <input name="email_usuario" type="text" class="input-field" placeholder="Email" maxlength="50">
-                      <input name="senha_usuario" type="password" class="input-field" placeholder="Senha" maxlength="15">
-                      <input name="confSenha" type="password" class="input-field" placeholder="Confirmar senha" maxlength="15">
-                      <input type="submit" value="Cadastrar">
-                  </form>
+    <form action="cadastrar.php" class="prof" method="POST">
+      <div class="corpo-form">
+        <div class="form-box-cadastrar">
+          <div id="btn"></div>
+            <div>
+              <div class="form-in-form">
+                <div class="row">
+                  <div class="form-group col-md-12" name="nome_usuario">
+                    <label for="name">Nome Completo:</label>
+                    <input type="text" class="form-control" name="nome_usuario" required autofocus>
+                  </div>
                 </div>
+                <div class="row">
+                  <div class="form-group col-md-12" name="email_usuario">
+                    <label for="name">E-mail:</label>
+                    <input type="email" class="form-control" name="email_usuario" required autofocus>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12" name="senha_usuario">
+                    <label for="name">Senha:</label>
+                    <input type="password" class="form-control" name="senha_usuario" required>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12" name="confSenha">
+                    <label for="name">Confirmar Senha:</label>
+                    <input type="password" class="form-control" name="confSenha" required>
+                  </div>
+                </div>
+                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Cadastrar" name="cadastrar">
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-     </div>
+      </form>
+      <div id="msg-erro">
+        <a href="index.php"><strong>Cadastre-se!</strong></a>
+      </div>
       <?php
      //verifica se clicou no botão
       if(isset($_POST['nome_usuario']))
         {
           //addslashes impede comandos maliciosos para hackear sites
         $nome = addslashes($_POST['nome_usuario']);
-        $crm = addslashes($_POST['crm_usuario']);
-        $celular = addslashes($_POST['cel_usuario']);
         $email = addslashes($_POST['email_usuario']);
         $senha = addslashes($_POST['senha_usuario']);
         $confirmarSenha = addslashes($_POST['confSenha']);
 
         //verifica se está preenchido
-        if(!empty($nome) && !empty($crm) && !empty($celular) && 
-          !empty($email) && !empty($senha) && !empty($confirmarSenha))
+        if(!empty($nome) && !empty($email) && !empty($senha) && !empty($confirmarSenha))
           {
             //conexão com o banco e verificação/exibição de msg erro/confirmação
-            $u->conectar("multiterapiabd","localhost","root","");
+            $u->conectar("mdata","localhost","root","");
             //variável msgErro está na classe Usuario
             if($u->msgErro == "")
             {
               if($senha == $confirmarSenha)
               {
-                if($u->cadastrar($nome,$crm,$celular,$email,$senha))
+                if($u->cadastrar($nome,$email,$senha))
                 {
                   ?>
                     <div id="msg-sucesso">
@@ -68,6 +82,7 @@
                     <div class="msg-erro">
                       Email já cadastrado!
                     </div>
+
                   <?php
                 }
               }
