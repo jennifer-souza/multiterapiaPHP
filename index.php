@@ -1,79 +1,72 @@
 <!DOCTYPE html>
-<?php 
-    require_once 'classes/usuarios.php';
-    $u = new Usuario;
-?>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Login - Multiterapia</title>
-    <link rel="stylesheet" href="css/style.css">
-  </head>
+<html lang="pt-br">
+  <?php include('head.html'); ?>
   <body>
-      <div class="corpo-form">
-          <div class="form-box">
-            <div id="btn"></div>
-              <div id="title">
-                <h2>Login</h2>
-              </div>
-                <div>
-                  <div class="form-in-form">
-                    <form method="POST">
-                        <input name="email_usuario" type="email" class="input-field" placeholder="Email">
-                        <input name="senha_usuario" type="password" class="input-field" placeholder="Senha">
-                        <input type="submit" value="Entrar">
-                        <a href="cadastrar.php"><strong>Cadastre-se aqui!</strong></a>
-                    </form>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <?php
-     //verifica se clicou no botão
+    <?php
+
+      session_start();
+
+      if($_SERVER['REQUEST_METHOD'] === 'POST'){
+      
+      include('classes/conexao.php');
+
+      //addslashes impede comandos maliciosos para hackear o site
+      $email = addslashes($_POST['email_usuario']);
+      $senha = addslashes($_POST['senha_usuario']);
+      //verifica se clicou no botão
       if(isset($_POST['email_usuario']))
+      {
+        $sql = "SELECT * FROM tb_login WHERE email_usuario='".$email."' AND senha_usuario='".$senha."'";
+        echo ($sql);
+        mysqli_query($link, $sql);
+         
+        if(!empty($email) && !empty($senha))
         {
-        //addslashes impede comandos maliciosos para hackear sites
-        $email = addslashes($_POST['email_usuario']);
-        $senha = addslashes($_POST['senha_usuario']);
-
-          //verifica se está preenchido
-          if(!empty($email) && !empty($senha))
-          {
-              $u->conectar("multiterapiabd","localhost","root","");
-
-              if($u->msgErro == "")
-              {
-                if($u->logar($email,$senha))
-                {
-                    header("location: home.php");
-                }
-                else
-                {
-                  ?>
-                    <div id="msg-erro">
-                      Email e/ou senha estão incorretos!
-                    </div>
-                  <?php
-                }
-              }
-              else
-              {
-                ?>
-                  <div id="msg-erro">
-                    <?php echo "Erro: ".$u->msgErro; ?>
-                  </div>
-                <?php
-              }
-          }
-          else
-          {
-            ?>
-              <div id="msg-erro">
-                Preecha os campos!
-              </div>
-            <?php
-          }
-      }
+          $_SESSION['email_usuario'];
+          $_SESSION['senha_usuario'];
           ?>
-    </body>
+          <script type="text/javascript">location.replace("home.php")</script>
+          <?php
+          //header('location: http://localhost/MultiterapiaPHP/home.php');
+        }
+        else{
+          unset ($_SESSION['email_usuario']);
+          unset ($_SESSION['senha_usuario']);
+          ?>
+          <script type="text/javascript">location.replace("index.php")</script>
+          <?php
+          echo"Erro! E-mail ou senha incorreto <br/>"; #Tentem melhorar a execução caso seja um usuário inválido!
+        }
+      }
+    }
+    ?>  
+    <form action="index.php" method="POST">
+      <div class="corpo-form">
+        <div class="form-box">
+          <div id="btn"></div>
+            <div>
+              <div class="form-in-form">
+                <div class="row">
+                  <div class="form-group col-md-12" name="email_usuario">
+                    <label for="name">E-mail:</label>
+                    <input type="email" class="form-control" name="email_usuario">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group col-md-12" name="senha_usuario">
+                    <label for="name">Senha:</label>
+                    <input type="password" class="form-control" name="senha_usuario">
+                  </div>
+                </div>
+                <div class="row btn-toolbar" role="toolbar" style="padding-left: 80%;">
+                  <div class="btn-group mr-2" role="group" name="entrar">
+                    <input type="submit" class="btn btn-success" value="Entrar" name="entrar">
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+  </body>
 </html>

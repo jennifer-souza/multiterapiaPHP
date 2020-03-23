@@ -2,6 +2,7 @@
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
       include('classes/conexao.php');
+      
       $nome = $_POST["nome_profissional"];
       $licenca = $_POST["licenca_atuacao"];
       $cpf = $_POST["cpf_profissional"];

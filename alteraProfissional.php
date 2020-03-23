@@ -2,6 +2,7 @@
    include('classes/conexao.php');
 
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+      
       $id = $_POST["id_profissional"];
       $nome = $_POST["nome_profissional"];
       $licenca = $_POST["licenca_atuacao"];
@@ -11,7 +12,8 @@
       $celular = $_POST["celular_profissional"];
       $area = $_POST["area_atuacao"];
       $dataC = $_POST["dt_cad_profissional"];
-      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', area_profissional= '" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional= '" . $dataC . "' WHERE id_profissional=" . $id;
+      
+      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', area_profissional='" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
       //echo ($sql);
       mysqli_query($link, $sql);
       ?>

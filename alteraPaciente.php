@@ -18,7 +18,8 @@
       $celular = $_POST["celular_paciente"];
       $email = $_POST["email_paciente"];
       $dataC = $_POST["dt_cad_paciente"];
-      $sql = "UPDATE tb_paciente SET nome_paciente='" . $nome . "', cpf_paciente='" . $cpf . "', rg_paciente='" . $rg . "', dt_nasc_paciente='" . $dataN . "', profissao_paciente='" . $profissao . "', logadouro_paciente='" . $logadouro . "', numero_paciente='" . $numero . "', bairro_paciente= '" . $bairro . "', cidade_paciente='" . $cidade . "', cep_paciente= '" . $cep . "', uf_paciente='" . $uf . "', telefone_paciente='" . $telefone . "', celular_paciente= '" . $celular . "', email_paciente='" . $email . "', dt_cad_paciente= '" . $dataC . "' WHERE id_paciente=" . $id;
+
+      $sql = "UPDATE tb_paciente SET nome_paciente='" . $nome . "', cpf_paciente='" . $cpf . "', rg_paciente='" . $rg . "', dt_nasc_paciente='" . $dataN . "', profissao_paciente='" . $profissao . "', logadouro_paciente='" . $logadouro . "', numero_paciente='" . $numero . "', bairro_paciente='" . $bairro . "', cidade_paciente='" . $cidade . "', cep_paciente='" . $cep . "', uf_paciente='" . $uf . "', telefone_paciente='" . $telefone . "', celular_paciente='" . $celular . "', email_paciente='" . $email . "', dt_cad_paciente='" . $dataC . "' WHERE id_paciente='" . $id . "'";
       //echo ($sql);
       mysqli_query($link, $sql);
       ?>
@@ -26,7 +27,7 @@
       <?php
    }
     $id = $_GET['id'];
-    $sql = "SELECT * FROM tb_paciente WHERE id_paciente =" . $id;
+    $sql = "SELECT * FROM tb_paciente WHERE id_paciente=" . $id;
     $result = mysqli_query($link, $sql);
 ?>
 <!DOCTYPE html>
