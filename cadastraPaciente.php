@@ -36,7 +36,7 @@
 <?php include('header.html'); ?>
     <form action="cadastraPaciente.php" class="prof" method="POST">
         <hr />
-          <h2>Novo paciente</h2>
+          <h2 class="border border-secondary">Novo paciente</h2>
         <hr />
         <div class="row">
             <div class="form-group col-md-6" name="nome_paciente">

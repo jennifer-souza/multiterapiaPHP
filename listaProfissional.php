@@ -13,9 +13,9 @@
 		?>
 		<div class="prof">
 			<hr>	
-				<h2>Lista de Profissionais</h2>
+				<h2 class="border border-secondary">Lista de Profissionais</h2>
 			<hr>
-			<table class="table table-hover table-sm">
+			<table class="table table-hover table-sm border border-secondary">
 			    <tr>
 			      <td class="table-dark">Nome</td>
 			      <td class="table-dark">Área de Atuação</td>

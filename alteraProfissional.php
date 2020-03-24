@@ -37,7 +37,7 @@ while($linhaTabela = mysqli_fetch_array($result)){
 ?>
     <form action="alteraProfissional.php" class="prof" method="POST">
         <hr />
-          <h2>Editar profissional</h2>
+          <h2 class="border border-secondary">Editar profissional</h2>
         <hr />
         <input type="hidden" value="<?php echo($linhaTabela[0]) ?>" name="id_profissional">
         <div class="row">

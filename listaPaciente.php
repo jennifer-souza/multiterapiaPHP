@@ -13,9 +13,9 @@
 		?>
 		<div class="prof">
 			<hr>	
-				<h2>Lista de Pacientes</h2>
+				<h2 class="border border-secondary">Lista de Pacientes</h2>
 			<hr>
-			<table class="table table-hover table-sm">
+			<table class="table table-hover table-sm border border-secondary">
 			    <tr>
 			      <td colspan="2" class="table-dark">Nome</td>
 			      <td colspan="2" class="table-dark">CPF</td>

@@ -43,7 +43,7 @@
     </nav>
     <form action="cadastroAgendamento.php" class="prof" method="POST">
         <hr />
-        <h2>Novo Agendamento</h2>
+        <h2 class="border border-secondary">Novo Agendamento</h2>
         <hr />
         <div class="row">
             <div class="form-group col-md-6" name="area_atuacao">
