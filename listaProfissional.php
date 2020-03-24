@@ -15,33 +15,33 @@
 			<hr>	
 				<h2>Lista de Profissionais</h2>
 			<hr>
-			<table class="table table-bordered">
+			<table class="table table-hover table-sm">
 			    <tr>
-			      <td colspan="2">Nome</td>
-			      <td colspan="2">Área de Atuação</td>
-			      <td colspan="2">Licença Profissional</td>
-			      <td colspan="2">CPF</td>
-			      <td colspan="2">RG</td>
-			      <td colspan="2">Email</td>
-			      <td colspan="2">Celular</td>
-			      <td colspan="2">Data de Cadastro</td>
-			      <td colspan="2"></td>
-			      <td colspan="2"></td>
+			      <td class="table-dark">Nome</td>
+			      <td class="table-dark">Área de Atuação</td>
+			      <td class="table-dark">Licença Profissional</td>
+			      <td class="table-dark">CPF</td>
+			      <td class="table-dark">RG</td>
+			      <td class="table-dark">Email</td>
+			      <td class="table-dark">Celular</td>
+			      <td class="table-dark">Data de Cadastro</td>
+			      <td class="table-dark"></td>
+			      <td class="table-dark"></td>
 			    </tr>
 				<?php 
 				while($linhaTabela = mysqli_fetch_array($result)){
 				?>
 				<tr>
-					<td colspan="2"><?php echo ($linhaTabela[1])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[7])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[2])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[3])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[4])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[5])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[6])?></td>
-					<td colspan="2"><?php echo ($linhaTabela[8])?></td>
-					<td><a href="alteraProfissional.php?id=<?php echo($linhaTabela[0]) ?> ">Alterar</a></td>
-					<td><a href="apagaProfissional.php?id=<?php echo($linhaTabela[0]) ?> ">Apagar</a></td>
+					<td class="table-active"><?php echo ($linhaTabela[1])?></td>
+					<td  class="table-active"><?php echo ($linhaTabela[7])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[2])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[3])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[4])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[5])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[6])?></td>
+					<td class="table-active"><?php echo ($linhaTabela[8])?></td>
+					<td><a href="alteraProfissional.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-warning btn-sm">Alterar</button></a></td>
+					<td><a href="apagaProfissional.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-danger btn-sm">Apagar</button></a></td>
 				</tr>
 				<?php	
 				}

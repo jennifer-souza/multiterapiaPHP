@@ -40,7 +40,7 @@
     ?>
         <form action="alteraPaciente.php" class="prof" method="POST">
             <hr />
-                <h2>Novo paciente</h2>
+                <h2>Editar paciente</h2>
             <hr />
             <div class="row">
                 <div class="form-group col-md-6 name="nome_paciente">

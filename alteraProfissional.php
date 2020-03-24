@@ -32,7 +32,7 @@
 <?php include('header.html'); ?>
 <?php 
 
-  while($linhaTabela = mysqli_fetch_array($result)){
+while($linhaTabela = mysqli_fetch_array($result)){
 
 ?>
     <form action="alteraProfissional.php" class="prof" method="POST">
@@ -101,10 +101,10 @@
         </div>
         <hr />
     </form>
-    <?php 
+<?php 
 
-      }
+  }
 
-    ?>
+?>
 </body>
 </html>
