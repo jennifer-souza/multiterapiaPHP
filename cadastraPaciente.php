@@ -21,7 +21,7 @@
       $dataC = $_POST["dt_cad_paciente"];
 
       $sql = "INSERT INTO tb_paciente VALUES('','" . $nome . "', '" . $cpf . "', '" . $rg . "', '" . $dataN . "', '" . $profissao . "', '" . $logadouro . "', '" . $numero . "', '" . $bairro . "', '" . $cidade . "', '" . $cep . "', '" . $uf . "', '" . $telefone . "', '" . $celular . "', '" . $email . "', '" . $dataC . "')";
-      echo ($sql);
+      //echo ($sql);
       mysqli_query($link, $sql);
       ?>
       <script type="text/javascript">location.replace("listaPaciente.php")</script>

@@ -44,9 +44,6 @@
           </div>
         </div>
       </form>
-      <div id="msg-erro">
-        <a href="index.php"><strong>Cadastre-se!</strong></a>
-      </div>
       <?php
      //verifica se clicou no botão
       if(isset($_POST['nome_usuario']))
