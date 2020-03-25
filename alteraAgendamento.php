@@ -1,11 +1,34 @@
 <?php 
-  session_start();
-  if(!isset($_SESSION['id_usuario']))
-  {
-    header("location: index.php");
-    exit;
-  }
+   include('classes/conexao.php');
+   session_start();
+      if(!isset($_SESSION['id_usuario']))
+      {
+        header("location: index.php");
+        exit;
+      }
 
+   if($_SERVER['REQUEST_METHOD'] === 'POST'){
+      
+      $id = $_POST["id_profissional"];
+      $nome = $_POST["nome_profissional"];
+      $licenca = $_POST["licenca_atuacao"];
+      $cpf = $_POST["cpf_profissional"];
+      $rg = $_POST["rg_profissional"];
+      $email = $_POST["email_profissional"];
+      $celular = $_POST["celular_profissional"];
+      $area = $_POST["area_atuacao"];
+      $dataC = $_POST["dt_cad_profissional"];
+      
+      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', area_profissional='" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
+      //echo ($sql);
+      mysqli_query($link, $sql);
+      ?>
+      <script type="text/javascript">location.replace("listaProfissional.php")</script>
+      <?php
+   }
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM tb_profissional WHERE id_profissional =" . $id;
+    $result = mysqli_query($link, $sql);
 ?>
 
 <!DOCTYPE html>
@@ -61,7 +84,7 @@
         <hr class="col-md-8" />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
             <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-danger" value="Cancelar">
+              <input type="submit" class="btn btn-danger" href="listaAgendamento.php" value="Cancelar">
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">
@@ -69,74 +92,5 @@
         </div>
         <hr class="col-md-8" />
     </form>
-<!--    <?php
-     //verifica se clicou no botão
-      if(isset($_POST['nome_paciente']))
-        {
-          //addslashes impede comandos maliciosos para hackear sites
-        $nome = addslashes($_POST['nome_paciente']);
-        $crm = addslashes($_POST['crm_paciente']);
-        $celular = addslashes($_POST['cel_paciente']);
-        $email = addslashes($_POST['email_paciente']);
-        $senha = addslashes($_POST['senha_paciente']);
-        $confirmarSenha = addslashes($_POST['confSenha']);
-
-        //verifica se está preenchido
-        if(!empty($nome) && !empty($crm) && !empty($celular) && 
-          !empty($email) && !empty($senha) && !empty($confirmarSenha))
-          {
-            //conexão com o banco e verificação/exibição de msg erro/confirmação
-            $u->conectar("multiterapiabd","localhost","root","");
-            //variável msgErro está na classe_paciente
-            if($u->msgErro == "")
-            {
-              if($senha == $confirmarSenha)
-              {
-                if($u->cadastrar($nome,$crm,$celular,$email,$senha))
-                {
-                  ?>
-                    <div id="msg-sucesso">
-                      Cadastrado com sucesso! Faça o login para entrar. 
-                        <a href="index.php"><strong>Clique aqui!</strong></a>
-                    </div>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                    <div class="msg-erro">
-                      Email já cadastrado!
-                    </div>
-                  <?php
-                }
-              }
-              else
-              {
-                ?>
-                  <div class="msg-erro">
-                    Senha e Confirmar senha não correspondem
-                  </div>
-                <?php
-              }
-            }
-            else
-            {
-              ?>
-                <div class="msg-erro">
-                  <?php echo "Erro: ".$u->msgErro; ?>
-                </div>
-              <?php
-            }
-          }
-          else
-          {
-              ?>
-                <div class="msg-erro">
-                  Preencha todos os campos!
-                </div>
-              <?php
-          }
-        }
-      ?> -->
 </body>
 </html>

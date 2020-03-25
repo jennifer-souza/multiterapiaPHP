@@ -1,4 +1,11 @@
 <?php 
+  session_start();
+    if(!isset($_SESSION['id_usuario']))
+    {
+      header("location: index.php");
+      exit;
+    }
+    
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
       include('classes/conexao.php');
@@ -9,12 +16,16 @@
       $rg = $_POST["rg_profissional"];
       $email = $_POST["email_profissional"];
       $celular = $_POST["celular_profissional"];
-      $area = $_POST["area_atuacao"];
+      $area = $_GET["idarea"];
       $dataC = $_POST["dt_cad_profissional"];
       
-      $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', '" . $licenca . "' , '" . $cpf . "', '" . $rg . "', '" . $email . "' , '" . $celular . "' , '" . $area . "', '" . $dataC . "')";
+      $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', '" . $licenca . "' , '" . $cpf . "', '" . $rg . "', '" . $email . "' , '" . $celular . "' , '" . $area . "', '" . $dataC . "') AND 
+      SELECT area, 
+      FROM tb_area
+      INNER JOIN tb_profissional
+      ON tb_area.id_area = tb_profissional.idarea";
       //echo ($sql);
-      mysqli_query($link, $sql);
+      $result = mysqli_query($link, $sql);
       ?>
       <script type="text/javascript">location.replace("listaProfissional.php")</script>
       <?php
@@ -27,61 +38,59 @@
   <body>
     <?php include('header.html'); ?>
     <form action="cadastraProfissional.php" class="prof" method="POST">
-        <hr />
-          <h2 class="border border-secondary">Novo profissional</h2>
-        <hr />
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Novo profissional</h2>
+        <hr class="col-md-8" />
         <div class="row">
-            <div class="form-group col-md-6" name="nome_profissional">
+            <div class="form-group col-md-8" name="nome_profissional">
                 <label for="name">Nome:</label>
                 <input type="text" class="form-control" name="nome_profissional">
             </div>
 
         </div>
         <div class="row">
-            <div class="form-group col-md-3" name="area_atuacao">
+            <div class="form-group col-md-4" name="idarea">
                 <label for="name">Área de atuação:</label>
                     <select class="form-control browser-default custom-select" 
-                            name="area_atuacao" style="width: 100%;">
+                            name="idarea" style="width: 100%;">
                         <option selected>Selecione sua área de atuação</option>
-                        <option value="Fisioterapia">Fisioterapia</option>
-                        <option value="Fonoaudiologia">Fonoaudiologia</option>
-                        <option value="Nutrição">Nutrição</option>
-                        <option value="Psicologia">Psicologia</option>
+                        <?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
+                          <option><?php echo($linhaTabela[7]) ?></option>
+                        <?php } ?>
                     </select>  
             </div>
-            <div class="form-group col-md-3" name="licenca_atuacao">
+            <div class="form-group col-md-4" name="licenca_atuacao">
                 <label for="name">Licença profissional:</label>
                 <input type="text" class="form-control" name="licenca_atuacao">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-3" name="cpf_profissional">
+            <div class="form-group col-md-4" name="cpf_profissional">
                 <label for="name">CPF:</label>
                 <input type="text" class="form-control" name="cpf_profissional">
             </div>
-            <div class="form-group col-md-3" name="rg_profissional">
+            <div class="form-group col-md-4" name="rg_profissional">
                 <label for="name">RG:</label>
                 <input type="text" class="form-control" name="rg_profissional">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-6" name="email_profissional">
+            <div class="form-group col-md-8" name="email_profissional">
                 <label for="name">E-mail:</label>
                 <input type="text" class="form-control" name="email_profissional">
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-3" name="celular_profissional">
+            <div class="form-group col-md-4" name="celular_profissional">
                 <label for="name">Celular:</label>
                 <input type="text" class="form-control" name="celular_profissional">
             </div>
-            <div class="form-group col-md-3" name="dt_cad_profissional">
+            <div class="form-group col-md-4" name="dt_cad_profissional">
                 <label for="name">Data do cadastro:</label>
                 <input type="date" class="form-control" name="dt_cad_profissional">
             </div>
         </div>
-        <hr />
-        <div class="row btn-toolbar" role="toolbar" style="padding-left: 30%;">
+        <hr class="col-md-8" />
+        <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-danger" value="Cancelar">
             </div>
@@ -89,7 +98,7 @@
               <input type="submit" class="btn btn-success" value="Salvar">
             </div>   
         </div>
-        <hr />
+        <hr class="col-md-8" />
     </form>
   </body>
 </html>

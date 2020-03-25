@@ -1,5 +1,11 @@
 <?php 
 	include('classes/conexao.php');
+	  session_start();
+	  if(!isset($_SESSION['id_usuario']))
+	  {
+	    header("location: index.php");
+	    exit;
+	  }
 ?>
 
 <!DOCTYPE html>
@@ -12,9 +18,8 @@
 			$result = mysqli_query($link, $sql);
 		?>
 		<div class="prof">
-			<hr>	
-				<h2 class="border border-secondary">Lista de Profissionais</h2>
-			<hr>
+			<h2 class="border border-secondary rounded bg-secondary text-white">Lista de Profissionais</h2>
+			<hr />
 			<table class="table table-hover table-sm border border-secondary">
 			    <tr>
 			      <td class="table-dark">Nome</td>
