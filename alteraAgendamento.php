@@ -9,25 +9,24 @@
 
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
       
-      $id = $_POST["id_profissional"];
-      $nome = $_POST["nome_profissional"];
-      $licenca = $_POST["licenca_atuacao"];
-      $cpf = $_POST["cpf_profissional"];
-      $rg = $_POST["rg_profissional"];
-      $email = $_POST["email_profissional"];
-      $celular = $_POST["celular_profissional"];
-      $area = $_POST["area_atuacao"];
-      $dataC = $_POST["dt_cad_profissional"];
+      $id    = $_POST["id"];
+      $pac   = $_POST["idpaciente"];
+      $prof  = $_POST["idprofissional"];
+      $data  = $_POST["data"];
+      $hora  = $_POST["hora"];
+      $mot   = $_POST["motivo"];
       
-      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', area_profissional='" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
+      $sql = "UPDATE tb_agendamento SET idpaciente='" . $pac . "', 
+      idprofissional='" . $prof . "', data='" . $data . "', 
+      hora='" . $hora . "', motivo='" . $mot . "' WHERE id=" . $id;
       //echo ($sql);
       mysqli_query($link, $sql);
       ?>
-      <script type="text/javascript">location.replace("listaProfissional.php")</script>
+      <script type="text/javascript">location.replace("listaAgendamento.php")</script>
       <?php
    }
     $id = $_GET['id'];
-    $sql = "SELECT * FROM tb_profissional WHERE id_profissional =" . $id;
+    $sql = "SELECT * FROM tb_agendamento WHERE id=" . $id;
     $result = mysqli_query($link, $sql);
 ?>
 
@@ -37,7 +36,7 @@
 <body>
 <?php include('header.html'); ?>
     <form action="cadastroAgendamento.php" class="prof" method="POST">
-        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Novo Agendamento</h2>
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Editar Agendamento</h2>
         <hr class="col-md-8" />
         <div class="row">
             <div class="form-group col-md-8" name="idpaciente">

@@ -1,11 +1,29 @@
 <?php 
-  session_start();
-  if(!isset($_SESSION['id_usuario']))
-  {
-    header("location: index.php");
-    exit;
-  }
+   session_start();
+      if(!isset($_SESSION['id_usuario']))
+      {
+        header("location: index.php");
+        exit;
+      }
+   
+   include('classes/conexao.php');
 
+   if($_SERVER['REQUEST_METHOD'] === 'POST'){
+      
+      $pac   = $_POST["idpaciente"];
+      $prof  = $_POST["idprofissional"];
+      $data  = $_POST["data"];
+      $hora  = $_POST["hora"];
+      $mot   = $_POST["motivo"];
+      
+      $sql = "INSERT INTO tb_agendamento VALUES('', '" . $pac . "', 
+      '" . $prof . "', '" . $data . "', '" . $hora . "', '" . $mot . "')";
+      //echo ($sql);
+      mysqli_query($link, $sql);
+      ?>
+      <script type="text/javascript">location.replace("listaAgendamento.php")</script>
+      <?php
+   }
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +31,7 @@
 <?php include('head.html'); ?>
 <body>
 <?php include('header.html'); ?>
-    <form action="cadastroAgendamento.php" class="prof" method="POST">
+    <form action="cadastraAgendamento.php" class="prof" method="POST">
         <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Novo Agendamento</h2>
         <hr class="col-md-8" />
         <div class="row">
@@ -22,10 +40,14 @@
                 <select class="form-control browser-default custom-select" 
                         name="idpaciente" style="width: 100%;">
                     <option selected>Selecione o paciente que será atendido</option>s
-                    <option value="fisioterapia">Fisioterapia</option>
-                    <option value="psicologia">Psicologia</option>
-                    <option value="nutricao">Nutrição</option>
-                    <option value="fonoaudiologia">Fonoaudiologia</option>
+                    <?php 
+                    // Selecionar dados da tabela de área
+                      $sqlPac = "SELECT * FROM tb_paciente";
+                      $resultado = mysqli_query($link, $sqlPac);
+                    // Ler resultados da tabela e escrever na combobox
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
+                        <?php } ?>
                 </select>  
             </div>
         </div>
@@ -35,17 +57,21 @@
                 <select class="form-control browser-default custom-select" 
                         name="idprofissional" style="width: 100%;">
                     <option selected>Selecione o profissional que irá atender</option>s
-                    <option value="fisioterapia">Fisioterapia</option>
-                    <option value="psicologia">Psicologia</option>
-                    <option value="nutricao">Nutrição</option>
-                    <option value="fonoaudiologia">Fonoaudiologia</option>
+                    <?php 
+                    // Selecionar dados da tabela de área
+                      $sqlPro = "SELECT * FROM tb_profissional";
+                      $resultado = mysqli_query($link, $sqlPro);
+                    // Ler resultados da tabela e escrever na combobox
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
+                        <?php } ?>
                 </select>  
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4" name="data">
                 <label for="name">Data do agendamento:</label>
-                <input type="datetime-local" class="form-control" name="data">
+                <input type="date" class="form-control" name="data">
             </div>
             <div class="form-group col-md-4" name="hora">
                 <label for="name">Hora do agendamento:</label>
@@ -69,74 +95,5 @@
         </div>
         <hr class="col-md-8" />
     </form>
-<!--    <?php
-     //verifica se clicou no botão
-      if(isset($_POST['nome_paciente']))
-        {
-          //addslashes impede comandos maliciosos para hackear sites
-        $nome = addslashes($_POST['nome_paciente']);
-        $crm = addslashes($_POST['crm_paciente']);
-        $celular = addslashes($_POST['cel_paciente']);
-        $email = addslashes($_POST['email_paciente']);
-        $senha = addslashes($_POST['senha_paciente']);
-        $confirmarSenha = addslashes($_POST['confSenha']);
-
-        //verifica se está preenchido
-        if(!empty($nome) && !empty($crm) && !empty($celular) && 
-          !empty($email) && !empty($senha) && !empty($confirmarSenha))
-          {
-            //conexão com o banco e verificação/exibição de msg erro/confirmação
-            $u->conectar("multiterapiabd","localhost","root","");
-            //variável msgErro está na classe_paciente
-            if($u->msgErro == "")
-            {
-              if($senha == $confirmarSenha)
-              {
-                if($u->cadastrar($nome,$crm,$celular,$email,$senha))
-                {
-                  ?>
-                    <div id="msg-sucesso">
-                      Cadastrado com sucesso! Faça o login para entrar. 
-                        <a href="index.php"><strong>Clique aqui!</strong></a>
-                    </div>
-                  <?php
-                }
-                else
-                {
-                  ?>
-                    <div class="msg-erro">
-                      Email já cadastrado!
-                    </div>
-                  <?php
-                }
-              }
-              else
-              {
-                ?>
-                  <div class="msg-erro">
-                    Senha e Confirmar senha não correspondem
-                  </div>
-                <?php
-              }
-            }
-            else
-            {
-              ?>
-                <div class="msg-erro">
-                  <?php echo "Erro: ".$u->msgErro; ?>
-                </div>
-              <?php
-            }
-          }
-          else
-          {
-              ?>
-                <div class="msg-erro">
-                  Preencha todos os campos!
-                </div>
-              <?php
-          }
-        }
-      ?> -->
 </body>
 </html>

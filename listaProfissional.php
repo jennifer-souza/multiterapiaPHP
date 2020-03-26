@@ -33,9 +33,7 @@
 			      <td class="table-dark"></td>
 			      <td class="table-dark"></td>
 			    </tr>
-				<?php 
-				while($linhaTabela = mysqli_fetch_array($result)){
-				?>
+				<?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
 				<tr>
 					<td class="table-active"><?php echo ($linhaTabela[1])?></td>
 					<td  class="table-active"><?php echo ($linhaTabela[7])?></td>
@@ -48,9 +46,7 @@
 					<td><a href="alteraProfissional.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-warning btn-sm">Alterar</button></a></td>
 					<td><a href="apagaProfissional.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-danger btn-sm">Apagar</button></a></td>
 				</tr>
-				<?php	
-				}
-				?>
+				<?php }	?>
 			</table>
 		</div>
 	</body>

@@ -5,26 +5,25 @@
       header("location: index.php");
       exit;
     }
+    // Para que esteja acessivel a todo o script
+    include('classes/conexao.php');
     
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
-      include('classes/conexao.php');
       
-      $nome = $_POST["nome_profissional"];
-      $licenca = $_POST["licenca_atuacao"];
-      $cpf = $_POST["cpf_profissional"];
-      $rg = $_POST["rg_profissional"];
-      $email = $_POST["email_profissional"];
-      $celular = $_POST["celular_profissional"];
-      $area = $_GET["idarea"];
-      $dataC = $_POST["dt_cad_profissional"];
+      $nome     = $_POST["nome_profissional"];
+      $licenca  = $_POST["licenca_atuacao"];
+      $cpf      = $_POST["cpf_profissional"];
+      $rg       = $_POST["rg_profissional"];
+      $email    = $_POST["email_profissional"];
+      $celular  = $_POST["celular_profissional"];
+      $area     = $_POST["idarea"];
+      $dataC    = $_POST["dt_cad_profissional"];
       
-      $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', '" . $licenca . "' , '" . $cpf . "', '" . $rg . "', '" . $email . "' , '" . $celular . "' , '" . $area . "', '" . $dataC . "') AND 
-      SELECT area, 
-      FROM tb_area
-      INNER JOIN tb_profissional
-      ON tb_area.id_area = tb_profissional.idarea";
+      $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', 
+      '" . $licenca . "', '" . $cpf . "', '" . $rg . "', 
+      '" . $email . "', '" . $celular . "', '" . $area . "', '" . $dataC . "')";
       //echo ($sql);
+      
       $result = mysqli_query($link, $sql);
       ?>
       <script type="text/javascript">location.replace("listaProfissional.php")</script>
@@ -50,13 +49,18 @@
         <div class="row">
             <div class="form-group col-md-4" name="idarea">
                 <label for="name">Área de atuação:</label>
-                    <select class="form-control browser-default custom-select" 
-                            name="idarea" style="width: 100%;">
-                        <option selected>Selecione sua área de atuação</option>
-                        <?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
-                          <option><?php echo($linhaTabela[7]) ?></option>
+                <select class="form-control browser-default custom-select" 
+                        name="idarea" style="width: 100%;">
+                    <option selected>Selecione sua área de atuação</option>
+                    <?php 
+                    // Selecionar dados da tabela de área
+                      $sqlArea = "SELECT * FROM tb_area";
+                      $resultado = mysqli_query($link, $sqlArea);
+                    // Ler resultados da tabela e escrever na combobox
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
                         <?php } ?>
-                    </select>  
+                </select>  
             </div>
             <div class="form-group col-md-4" name="licenca_atuacao">
                 <label for="name">Licença profissional:</label>

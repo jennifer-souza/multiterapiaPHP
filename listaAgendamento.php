@@ -14,7 +14,7 @@
 	<body>
 		<?php include('header.html'); ?>
 		<?php
-			$sql = "SELECT * FROM tb_profissional";
+			$sql = "SELECT * FROM tb_agendamento";
 			$result = mysqli_query($link, $sql);
 		?>
 		<div class="prof">
@@ -29,20 +29,16 @@
 			      <td class="table-dark"></td>
 			      <td class="table-dark"></td>
 			    </tr>
-				<?php 
-				while($linhaTabela = mysqli_fetch_array($result)){
-				?>
-				<tr>
-					<td class="table-active"><?php echo ($linhaTabela[1])?></td>
-					<td  class="table-active"><?php echo ($linhaTabela[2])?></td>
-					<td class="table-active"><?php echo ($linhaTabela[3])?></td>
-					<td class="table-active"><?php echo ($linhaTabela[4])?></td>
-					<td><a href="alteraAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-warning btn-sm">Alterar</button></a></td>
-					<td><a href="apagaAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-danger btn-sm">Apagar</button></a></td>
-				</tr>
-				<?php	
-				}
-				?>
+				<?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
+					<tr>
+						<td class="table-active"><?php echo ($linhaTabela[1])?></td>
+						<td  class="table-active"><?php echo ($linhaTabela[2])?></td>
+						<td class="table-active"><?php echo ($linhaTabela[3])?></td>
+						<td class="table-active"><?php echo ($linhaTabela[4])?></td>
+						<td><a href="alteraAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-warning btn-sm">Alterar</button></a></td>
+						<td><a href="apagaAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-danger btn-sm">Apagar</button></a></td>
+					</tr>
+				<?php } ?>
 			</table>
 		</div>
 	</body>

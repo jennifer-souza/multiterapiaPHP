@@ -9,17 +9,17 @@
 
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
       
-      $id = $_POST["id_profissional"];
-      $nome = $_POST["nome_profissional"];
-      $licenca = $_POST["licenca_atuacao"];
-      $cpf = $_POST["cpf_profissional"];
-      $rg = $_POST["rg_profissional"];
-      $email = $_POST["email_profissional"];
-      $celular = $_POST["celular_profissional"];
-      $area = $_POST["area_atuacao"];
-      $dataC = $_POST["dt_cad_profissional"];
+      $id       = $_POST["id_profissional"];
+      $nome     = $_POST["nome_profissional"];
+      $licenca  = $_POST["licenca_atuacao"];
+      $cpf      = $_POST["cpf_profissional"];
+      $rg       = $_POST["rg_profissional"];
+      $email    = $_POST["email_profissional"];
+      $celular  = $_POST["celular_profissional"];
+      $area     = $_POST["idarea"];
+      $dataC    = $_POST["dt_cad_profissional"];
       
-      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', area_profissional='" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
+      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', idarea='" . $area . "', licenca_atuacao='" . $licenca . "', cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', email_profissional='" . $email . "', celular_profissional='" . $celular . "', dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
       //echo ($sql);
       mysqli_query($link, $sql);
       ?>
@@ -27,7 +27,7 @@
       <?php
    }
     $id = $_GET['id'];
-    $sql = "SELECT * FROM tb_profissional WHERE id_profissional =" . $id;
+    $sql = "SELECT * FROM tb_profissional WHERE id_profissional ='$id'" ;
     $result = mysqli_query($link, $sql);
 ?>
 
@@ -49,16 +49,15 @@
 
         </div>
         <div class="row">
-            <div class="form-group col-md-4" name="area">
+            <div class="form-group col-md-4" name="idarea">
                 <label for="name">Área de atuação:</label>
-                    <select class="form-control browser-default custom-select" 
-                            name="area" style="width: 100%;">
-                        
-                        <option <?php echo $linhaTabela[7]=='fisioterapia'? ('selected ') :'' ?> value="fisioterapia">Fisioterapia</option>
-                        <option <?php echo $linhaTabela[7]=='psicologia'? ('selected ') :''  ?>value="psicologia">Psicologia</option>
-                        <option <?php echo $linhaTabela[7]=='nutricao'? ('selected ') :''  ?>value="nutricao">Nutrição</option>
-                        <option <?php echo $linhaTabela[7]=='fonoaudiologia'? ('selected ') :''  ?>value="fonoaudiologia">Fonoaudiologia</option>
-                    </select>  
+                <select class="form-control browser-default custom-select" 
+                        name="idarea" style="width: 100%;">
+                    <option <?php echo $linhaTabela[7]=='1'? ('selected ') :'' ?> value="1">Fisioterapia</option>
+                    <option <?php echo $linhaTabela[7]=='2'? ('selected ') :''  ?>value="2">Fonoaudiologia</option>
+                    <option <?php echo $linhaTabela[7]=='3'? ('selected ') :''  ?>value="3">Nutrição</option>
+                    <option <?php echo $linhaTabela[7]=='4'? ('selected ') :''  ?>value="4">Psicologia</option>
+                </select>  
             </div>
             <div class="form-group col-md-4" name="licenca_atuacao">
                 <label for="name">Licença profissional:</label>
@@ -91,7 +90,7 @@
                 <input type="date" class="form-control" value="<?php echo($linhaTabela[8]) ?>" name="dt_cad_profissional">
             </div>
         </div>
-        <hr />
+        <hr class="col-md-8" />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
             <div class="btn-group mr-2" role="group">
               <input type="button" class="btn btn-danger" value="Cancelar">
@@ -100,7 +99,7 @@
               <input type="submit" class="btn btn-success" value="Salvar">
             </div>   
         </div>
-        <hr />
+        <hr class="col-md-8" />
     </form>
 <?php } ?>
 </body>
