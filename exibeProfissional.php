@@ -8,34 +8,7 @@
     // Para que esteja acessivel a todo o script
     include('classes/conexao.php');
     
-   if($_SERVER['REQUEST_METHOD'] === 'POST'){
-      
-      $id       = $_POST["id_profissional"];
-      $nome     = $_POST["nome_profissional"];
-      $licenca  = $_POST["licenca_atuacao"];
-      $cpf      = $_POST["cpf_profissional"];
-      $rg       = $_POST["rg_profissional"];
-      $email    = $_POST["email_profissional"];
-      $celular  = $_POST["celular_profissional"];
-      $area     = $_POST["idarea"];
-      $dataC    = $_POST["dt_cad_profissional"];
-      
-      $sql = "UPDATE tb_profissional SET nome_profissional='" . $nome . "', 
-      idarea='" . $area . "', crm_profissional='" . $licenca . "', 
-      cpf_profissional='" . $cpf . "', rg_profissional='" . $rg . "', 
-      email_profissional='" . $email . "', celular_profissional='" . $celular . "', 
-      dt_cad_profissional='" . $dataC . "' WHERE id_profissional=" . $id;
-
-      //echo ($sql);
-      
-      $result = mysqli_query($link, $sql);
-      ?>
-      <script type="text/javascript">location.replace("listaProfissional.php")</script>
-      <?php
-   }
-    
-
-    if($_GET['id'] != ""){
+    if ($_GET['id'] != ""){
       $id = $_GET['id'];
       $sql = "SELECT * FROM tb_profissional WHERE id_profissional='$id'";  
       $pesquisa = mysqli_query($link, $sql);
@@ -57,22 +30,22 @@
   <?php include('head.html'); ?>
   <body>
     <?php include('header.html'); ?>
-    <form action="alteraProfissional.php" class="prof" method="POST">
-        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Editar profissional</h2>
+    <form action="exibeProfissional.php" class="prof" method="_GET">
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Profissional > <?php echo $nome; ?></h2>
         <hr class="col-md-8" />
         <input type="hidden" value="<?php echo $id; ?>" name="id_profissional">
         <div class="row">
             <div class="form-group col-md-8" name="nome_profissional">
                 <label for="name">Nome:</label>
                 <?php /* Exemplo para escrever no campo caso exista um resultado para o valor de pesquisa */ ?>
-                <input type="text" class="form-control" name="nome_profissional" value="<?php if ($nome != '') { echo $nome; } ?>"> 
+                <input type="text" class="form-control" name="nome_profissional" value="<?php if ($nome != '') { echo $nome; } ?>" disabled> 
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4" name="idarea">
                 <label for="name">Área de atuação:</label>
                 <select class="form-control browser-default custom-select" 
-                        name="idarea" style="width: 100%;">
+                        name="idarea" style="width: 100%;" disabled>
                     <?php 
                     // Selecionar dados da tabela de área
                       $sqlArea = "SELECT * FROM tb_area";
@@ -93,45 +66,42 @@
             </div>
             <div class="form-group col-md-4" name="licenca_atuacao">
                 <label for="name">Licença profissional:</label>
-                <input type="text" class="form-control" name="licenca_atuacao" value="<?php if ($licenca != '') { echo $licenca; } ?>">
+                <input type="text" class="form-control" name="licenca_atuacao" value="<?php if ($licenca != '') { echo $licenca; } ?>" disabled>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4" name="cpf_profissional">
                 <label for="name">CPF:</label>
-                <input type="text" class="form-control" name="cpf_profissional" value="<?php if ($cpf != '') { echo $cpf; } ?>">
+                <input type="text" class="form-control" name="cpf_profissional" value="<?php if ($cpf != '') { echo $cpf; } ?>" disabled>
             </div>
             <div class="form-group col-md-4" name="rg_profissional">
                 <label for="name">RG:</label>
-                <input type="text" class="form-control" name="rg_profissional" value="<?php if ($rg != '') { echo $rg; } ?>">
+                <input type="text" class="form-control" name="rg_profissional" value="<?php if ($rg != '') { echo $rg; } ?>" disabled>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-8" name="email_profissional">
                 <label for="name">E-mail:</label>
-                <input type="text" class="form-control" name="email_profissional" value="<?php if ($email != '') { echo $email; } ?>">
+                <input type="text" class="form-control" name="email_profissional" value="<?php if ($email != '') { echo $email; } ?>" disabled>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4" name="celular_profissional">
                 <label for="name">Celular:</label>
-                <input type="text" class="form-control" name="celular_profissional" value="<?php if ($celular != '') { echo $celular; } ?>">
+                <input type="text" class="form-control" name="celular_profissional" value="<?php if ($celular != '') { echo $celular; } ?>" disabled>
             </div>
             <div class="form-group col-md-4" name="dt_cad_profissional">
                 <label for="name">Data do cadastro:</label>
-                <input type="date" class="form-control" name="dt_cad_profissional" value="<?php if ($dataC != '') { echo $dataC; } ?>">
+                <input type="date" class="form-control" name="dt_cad_profissional" value="<?php if ($dataC != '') { echo $dataC; } ?>" disabled>
             </div>
         </div>
         <hr class="col-md-8" />
-        <div class="row btn-toolbar" role="toolbar" style="padding-left: 45%;">
+        <div class="row btn-toolbar" role="toolbar" style="padding-left: 55%;">
             <div class="btn-group mr-2" role="group">
               <a href="listaProfissional.php ?> ">
-                <input type="button" class="btn btn-danger" value="Cancelar">
-              </a>  
-            </div>
-            <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-success" value="Salvar">
-            </div>   
+                <button type="button" class="btn btn-outline-danger">Voltar</button>
+              </a>
+            </div> 
         </div>
         <hr class="col-md-8" />
     </form>

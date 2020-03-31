@@ -22,6 +22,7 @@
       $sql = "INSERT INTO tb_profissional VALUES('','" . $nome . "', 
       '" . $licenca . "', '" . $cpf . "', '" . $rg . "', 
       '" . $email . "', '" . $celular . "', '" . $area . "', '" . $dataC . "')";
+      
       //echo ($sql);
       
       $result = mysqli_query($link, $sql);

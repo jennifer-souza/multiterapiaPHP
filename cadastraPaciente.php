@@ -5,30 +5,35 @@
       header("location: index.php");
       exit;
     }
+    
+    include('classes/conexao.php');
 
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
 
-      include('classes/conexao.php');
 
-      $nome = $_POST["nome_paciente"];
-      $cpf = $_POST["cpf_paciente"];
-      $rg = $_POST["rg_paciente"];
-      $dataN = $_POST["dt_nasc_paciente"];
-      $profissao = $_POST["profissao_paciente"];
-      $logadouro = $_POST["logadouro_paciente"];
-      $numero = $_POST["numero_paciente"];
-      $bairro = $_POST["bairro_paciente"];
-      $cidade = $_POST["cidade_paciente"];
-      $cep = $_POST["cep_paciente"];
-      $uf = $_POST["uf_paciente"];
-      $telefone = $_POST["telefone_paciente"];
-      $celular = $_POST["celular_paciente"];
-      $email = $_POST["email_paciente"];
-      $dataC = $_POST["dt_cad_paciente"];
+      $nome       = $_POST["nome_paciente"];
+      $cpf        = $_POST["cpf_paciente"];
+      $rg         = $_POST["rg_paciente"];
+      $dataN      = $_POST["dt_nasc_paciente"];
+      $profissao  = $_POST["profissao_paciente"];
+      $logadouro  = $_POST["logadouro_paciente"];
+      $numero     = $_POST["numero_paciente"];
+      $bairro     = $_POST["bairro_paciente"];
+      $cidade     = $_POST["cidade_paciente"];
+      $cep        = $_POST["cep_paciente"];
+      $uf         = $_POST["uf_paciente"];
+      $telefone   = $_POST["telefone_paciente"];
+      $celular    = $_POST["celular_paciente"];
+      $email      = $_POST["email_paciente"];
+      $dataC      = $_POST["dt_cad_paciente"];
 
-      $sql = "INSERT INTO tb_paciente VALUES('','" . $nome . "', '" . $cpf . "', '" . $rg . "', '" . $dataN . "', '" . $profissao . "', '" . $logadouro . "', '" . $numero . "', '" . $bairro . "', '" . $cidade . "', '" . $cep . "', '" . $uf . "', '" . $telefone . "', '" . $celular . "', '" . $email . "', '" . $dataC . "')";
+      $sql = "INSERT INTO tb_paciente VALUES('','" . $nome . "', '" . $cpf . "', 
+      '" . $rg . "', '" . $dataN . "', '" . $profissao . "', '" . $logadouro . "', 
+      '" . $numero . "', '" . $bairro . "', '" . $cidade . "', '" . $cep . "', 
+      '" . $uf . "', '" . $telefone . "', '" . $celular . "', '" . $email . "', 
+      '" . $dataC . "')";
       //echo ($sql);
-      mysqli_query($link, $sql);
+      $result = mysqli_query($link, $sql);
       ?>
       <script type="text/javascript">location.replace("listaPaciente.php")</script>
       <?php
@@ -96,15 +101,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-1" name="uf_paciente">
+            <div class="form-group col-md-2" name="uf_paciente">
                 <label for="name">UF:</label>
-                <input type="text" class="form-control" name="uf_paciente">
+                <select class="form-control browser-default custom-select" 
+                        name="uf_paciente" style="width: 100%;">
+                    <option selected>Estado</option>
+                    <?php 
+                    // Selecionar dados da tabela de área
+                      $sqlEst = "SELECT * FROM estados";
+                      $resultado = mysqli_query($link, $sqlEst);
+                    // Ler resultados da tabela e escrever na combobox
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
+                        <?php } ?>
+                </select>  
             </div>
             <div class="form-group col-md-3" name="telefone_paciente">
                 <label for="name">Telefore:</label>
                 <input type="text" class="form-control" name="telefone_paciente">
             </div>
-            <div class="form-group col-md-4" name="celular_paciente">
+            <div class="form-group col-md-3" name="celular_paciente">
                 <label for="name">Celular:</label>
                 <input type="text" class="form-control" name="celular_paciente">
             </div>

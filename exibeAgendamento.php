@@ -6,27 +6,6 @@
         header("location: index.php");
         exit;
       }
-
-
-   if($_SERVER['REQUEST_METHOD'] === 'POST'){
-      
-      $id    = $_POST["id"];
-      $pac   = $_POST["idpaciente"];
-      $prof  = $_POST["idprofissional"];
-      $data  = $_POST["data"];
-      $hora  = $_POST["hora"];
-      $mot   = $_POST["motivo"];
-      
-      $sql = "UPDATE tb_agendamento SET idpaciente='" . $pac . "', 
-      idprofissional='" . $prof . "', data='" . $data . "', 
-      hora='" . $hora . "', motivo='" . $mot . "' WHERE id=" . $id;
-      
-      //echo ($sql);
-      $result = mysqli_query($link, $sql);
-      ?>
-      <script type="text/javascript">location.replace("listaAgendamento.php")</script>
-      <?php
-   }
     
     if($_GET['id'] != ""){
       $id = $_GET['id'];
@@ -37,7 +16,7 @@
         $pac   = $linhaTabela[1];
         $prof  = $linhaTabela[2];
         $data  = $linhaTabela[3];
-        $hora  = $linhaTabela[4];
+        $hora  = date("H:i", strtotime($linhaTabela[4]));
         $mot   = $linhaTabela[5];
       }
     }
@@ -48,15 +27,15 @@
 <?php include('head.html'); ?>
 <body>
 <?php include('header.html'); ?>
-    <form action="alteraAgendamento.php" class="prof" method="POST">
-        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Editar Agendamento</h2>
+    <form action="exibeAgendamento.php" class="prof" method="_GET">
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Agendamento - <?php echo $pac; ?></h2>
         <hr class="col-md-8" />
         <input type="hidden" value="<?php echo $id; ?>" name="id">
         <div class="row">
             <div class="form-group col-md-8" name="idpaciente">
                 <label for="name">Paciente:</label>
                 <select class="form-control browser-default custom-select" 
-                        name="idpaciente" style="width: 100%;">
+                        name="idpaciente" style="width: 100%;" disabled>
                 <?php 
                     // Selecionar dados da tabela de área
                       $sqlPac = "SELECT * FROM tb_paciente";
@@ -80,7 +59,7 @@
             <div class="form-group col-md-8" name="idprofissional">
                 <label for="name">Profissional:</label>
                 <select class="form-control browser-default custom-select" 
-                        name="idprofissional" style="width: 100%;">
+                        name="idprofissional" style="width: 100%;" disabled>
                 <?php 
                     // Selecionar dados da tabela de área
                       $sqlPro = "SELECT * FROM tb_profissional";
@@ -103,27 +82,26 @@
         <div class="row">
             <div class="form-group col-md-4" name="data">
                 <label for="name">Data do agendamento:</label>
-                <input type="date" class="form-control" name="data" value="<?php if ($data != '') { echo $data; } ?>">
+                <input type="date" class="form-control" name="data" value="<?php if ($data != '') { echo $data; } ?>" disabled>
             </div>
             <div class="form-group col-md-4" name="hora">
                 <label for="name">Hora do agendamento:</label>
-                <input type="time" class="form-control" name="hora" value="<?php if ($hora != '') { echo $hora; } ?>">
+                <input type="time" class="form-control" name="hora" value="<?php if ($hora != '') { echo $hora; } ?>" disabled>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-8" name="motivo">
                 <label for="name">Motivo:</label>
-                <textarea class="form-control" name="motivo" rows="4"><?php if ($mot != '') { echo $mot; } ?></textarea>
+                <textarea class="form-control" name="motivo" rows="4" disabled><?php if ($mot != '') { echo $mot; } ?></textarea>
             </div>
         </div>
         <hr class="col-md-8" />
-        <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
+        <div class="row btn-toolbar" role="toolbar" style="padding-left: 55%;">
             <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-danger" value="Cancelar">
-            </div>
-            <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-success" value="Salvar">
-            </div>   
+              <a href="listaAgendamento.php ?> ">
+                <button type="button" class="btn btn-outline-danger">Voltar</button>
+              </a>
+            </div> 
         </div>
         <hr class="col-md-8" />
     </form>

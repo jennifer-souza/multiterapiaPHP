@@ -6,6 +6,8 @@
 	    header("location: index.php");
 	    exit;
 	  }
+	  
+	  //date("d/m/Y", strtotime($data))
 ?>
 
 <!DOCTYPE html>
@@ -28,23 +30,29 @@
 			      <td colspan="2" class="table-dark">Data de Nascimento</td>
 			      <td colspan="2" class="table-dark">Telefone</td>
 			      <td colspan="2" class="table-dark">Celular</td>
-			      <td colspan="2" class="table-dark">Email</td>
-			      <td colspan="2" class="table-dark">Data de Cadastro</td>
 			      <td colspan="2" class="table-dark"></td>
-			      
-			    </tr>
+			      <td colspan="2" class="table-dark"></td>
+				</tr>
 				<?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
 					<tr>
 						<td colspan="2" class="table-active"><?php echo ($linhaTabela[1])?></td>
 						<td colspan="2" class="table-active"><?php echo ($linhaTabela[2])?></td>
 						<td colspan="2" class="table-active"><?php echo ($linhaTabela[3])?></td>
-						<td colspan="2" class="table-active"><?php echo ($linhaTabela[4])?></td>
+						<td colspan="2" class="table-active">
+							<?php echo date("d/m/Y", strtotime($linhaTabela[4]))?></td>
 						<td colspan="2" class="table-active"><?php echo ($linhaTabela[12])?></td>
 						<td colspan="2" class="table-active"><?php echo ($linhaTabela[13])?></td>
-						<td colspan="2" class="table-active"><?php echo ($linhaTabela[14])?></td>
-						<td colspan="2" class="table-active"><?php echo ($linhaTabela[15])?></td>
-						<td><a href="alteraPaciente.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-warning btn-sm">Alterar</button></a></td>
-						<td><a href="apagaPaciente.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-outline-danger btn-sm">Apagar</button></a></td>
+						<td class="table-active">
+							<a href="exibePaciente.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-success btn-sm">	Exibir</button></a>
+						</td>
+						<td class="table-active">
+							<a href="alteraPaciente.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-warning btn-sm">
+								Editar</button></a>
+						</td>
+						<td class="table-active">	
+							<a href="apagaPaciente.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-danger btn-sm">
+								Apagar</button></a>
+						</td>
 					</tr>
 				<?php } ?>
 			</table>
