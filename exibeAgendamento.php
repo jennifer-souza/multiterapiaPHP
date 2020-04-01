@@ -18,6 +18,7 @@
         $data  = $linhaTabela[3];
         $hora  = date("H:i", strtotime($linhaTabela[4]));
         $mot   = $linhaTabela[5];
+        $area  = $linhaTabela[6];
       }
     }
 ?>
@@ -80,13 +81,26 @@
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4" name="data">
-                <label for="name">Data do agendamento:</label>
-                <input type="date" class="form-control" name="data" value="<?php if ($data != '') { echo $data; } ?>" disabled>
+            <div class="form-group col-md-4" name="idarea">
+                <label for="name">Área do atendimento:</label>
+                <select class="form-control browser-default custom-select" 
+                        name="idarea" style="width: 100%;">
+                    <option selected>Selecione a área do atendimento</option>
+                    <?php 
+                      $sqlArea = "SELECT * FROM tb_area";
+                      $resultado = mysqli_query($link, $sqlArea);
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
+                    <?php } ?>
+                </select>  
             </div>
-            <div class="form-group col-md-4" name="hora">
-                <label for="name">Hora do agendamento:</label>
-                <input type="time" class="form-control" name="hora" value="<?php if ($hora != '') { echo $hora; } ?>" disabled>
+            <div class="form-group col-md-2" name="data">
+                <label for="name">Data:</label>
+                <input type="date" class="form-control" name="data">
+            </div>
+            <div class="form-group col-md-2" name="hora">
+                <label for="name">Hora:</label>
+                <input type="time" class="form-control" name="hora">
             </div>
         </div>
         <div class="row">

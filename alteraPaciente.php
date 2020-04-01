@@ -77,11 +77,6 @@
         <form action="alteraPaciente.php" class="prof" method="POST">
             <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Editar paciente</h2>
             <hr class="col-md-8" />
-            <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
-                <div class="btn-group mr-2" role="group">
-                  <input type="submit" class="btn btn-primary" value="Salvar">
-                </div>   
-            </div>
             <input type="hidden" value="<?php echo $id; ?>" name="id_paciente">
             <div class="row">
                 <div class="form-group col-md-8 name="nome_paciente">

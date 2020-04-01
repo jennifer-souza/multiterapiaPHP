@@ -15,9 +15,10 @@
       $data  = $_POST["data"];
       $hora  = $_POST["hora"];
       $mot   = $_POST["motivo"];
+      $idarea   = $_POST["idarea"];
       
       $sql = "INSERT INTO tb_agendamento VALUES('', '" . $pac . "', 
-      '" . $prof . "', '" . $data . "', '" . $hora . "', '" . $mot . "')";
+      '" . $prof . "', '" . $data . "', '" . $hora . "', '" . $mot . "', '" . $idarea ."')";
       //echo ($sql);
       mysqli_query($link, $sql);
       ?>
@@ -58,23 +59,34 @@
                         name="idprofissional" style="width: 100%;">
                     <option selected>Selecione o profissional que irá atender</option>s
                     <?php 
-                    // Selecionar dados da tabela de área
                       $sqlPro = "SELECT * FROM tb_profissional";
                       $resultado = mysqli_query($link, $sqlPro);
-                    // Ler resultados da tabela e escrever na combobox
                         while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
                           <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
-                        <?php } ?>
+                    <?php } ?>
                 </select>  
             </div>
         </div>
         <div class="row">
-            <div class="form-group col-md-4" name="data">
-                <label for="name">Data do agendamento:</label>
+            <div class="form-group col-md-4" name="idarea">
+                <label for="name">Área do atendimento:</label>
+                <select class="form-control browser-default custom-select" 
+                        name="idarea" style="width: 100%;">
+                    <option selected>Selecione a área do atendimento</option>
+                    <?php 
+                      $sqlArea = "SELECT * FROM tb_area";
+                      $resultado = mysqli_query($link, $sqlArea);
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
+                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
+                    <?php } ?>
+                </select>  
+            </div>
+            <div class="form-group col-md-2" name="data">
+                <label for="name">Data:</label>
                 <input type="date" class="form-control" name="data">
             </div>
-            <div class="form-group col-md-4" name="hora">
-                <label for="name">Hora do agendamento:</label>
+            <div class="form-group col-md-2" name="hora">
+                <label for="name">Hora:</label>
                 <input type="time" class="form-control" name="hora">
             </div>
         </div>

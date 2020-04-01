@@ -19,16 +19,20 @@
 			$result = mysqli_query($link, $sql);
 		?>
 		<div class="prof">
-			<h2 class="border border-secondary rounded bg-secondary text-white">Lista de Profissionais</h2>
+			<h2 class="border border-secondary rounded bg-secondary text-white col-md-12">Lista de Profissionais</h2>
 			<hr />
 			<table class="table table-hover table-sm border border-secondary">
 			    <tr>
-			      <td class="table-dark">Nome</td>
-			      <td class="table-dark">Área de Atuação</td>
-			      <td class="table-dark">Licença Profissional</td>
-			      <td class="table-dark">CPF</td>
-			      <td class="table-dark">Celular</td>
-			      <td colspan="3" class="table-dark"></td>
+			      	<td class="table-dark">Nome</td>
+			      	<td class="table-dark">Área de Atuação</td>
+			      	<td class="table-dark">Licença Profissional</td>
+			      	<td class="table-dark">CPF</td>
+			      	<td class="table-dark">Celular</td>
+					<td colspan="3" class="table-dark">
+						<a href="cadastraProfissional.php" style="padding-left: 50%;">
+							<button class="btn btn-primary btn-sm" >Novo profissional</button>
+						</a>
+					</td>
 			    </tr>
 				<?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
 				<tr>
