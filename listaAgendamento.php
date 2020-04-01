@@ -7,9 +7,10 @@
 	    exit;
 	  }
 
-	$sql = "SELECT ag.*, pc.nome_paciente, pf.nome_profissional FROM tb_agendamento ag
+	$sql = "SELECT ag.*, pc.nome_paciente, pf.nome_profissional, a.area FROM tb_agendamento ag
 			INNER JOIN tb_paciente pc ON pc.id_paciente = ag.idpaciente
-			INNER JOIN tb_profissional pf ON pf.id_profissional = ag.idprofissional";
+			INNER JOIN tb_profissional pf ON pf.id_profissional = ag.idprofissional
+			INNER JOIN tb_area a ON a.id_area = ag.idarea";			
   	$result = mysqli_query($link, $sql);
 ?>
 
@@ -25,18 +26,20 @@
 			    <tr>
 				    <td class="table-dark">Paciente</td>
 				    <td class="table-dark">Profissional</td>
-				    <td class="table-dark">Data do agendamento</td>
+				    <td class="table-dark">Área</td>
+				    <td class="table-dark">Data agendada</td>
 				    <td class="table-dark">Hora</td>
 					<td colspan="3" class="table-dark">
-						<a href="cadastraAgendamento.php" style="padding-left: 50%;">
-							<button class="btn btn-primary btn-sm" >Novo agendamento</button>
+						<a href="cadastraAgendamento.php" style="padding-left: 52%;">
+							<button class="btn btn-primary btn-sm">Novo agendamento</button>
 						</a>
 					</td>
 			    </tr>
 				<?php while($linhaTabela = mysqli_fetch_array($result)){ ?>
 					<tr>
 						<td class="table-active"><?php echo ($linhaTabela[7]); ?></td>
-						<td  class="table-active"><?php echo ($linhaTabela[8]); ?></td>
+						<td class="table-active"><?php echo ($linhaTabela[8]); ?></td>
+						<td class="table-active"><?php echo ($linhaTabela[9]); ?></td>
 						<td class="table-active"><?php echo date("d/m/Y", strtotime($linhaTabela[3])); ?></td>
 						<td class="table-active"><?php echo date("H:i", strtotime($linhaTabela[4])); ?></td>
 						<td class="table-active">

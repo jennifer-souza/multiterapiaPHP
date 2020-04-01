@@ -76,9 +76,15 @@
                     <?php 
                       $sqlArea = "SELECT * FROM tb_area";
                       $resultado = mysqli_query($link, $sqlArea);
-                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
-                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
-                    <?php } ?>
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ 
+                          if ( $idarea == $linhaTabela[0] ) {
+                            echo '<option value="' . $linhaTabela[0] . '" selected>' . $linhaTabela[1] . '</option>';
+                          }
+                          else {
+                            echo '<option value="' . $linhaTabela[0] . '" >' . $linhaTabela[1] . '</option>';
+                          }
+                        } 
+                    ?>
                 </select>  
             </div>
             <div class="form-group col-md-2" name="data">

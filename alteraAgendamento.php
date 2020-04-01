@@ -10,12 +10,12 @@
 
    if($_SERVER['REQUEST_METHOD'] === 'POST'){
       
-      $id    = $_POST["id"];
-      $pac   = $_POST["idpaciente"];
-      $prof  = $_POST["idprofissional"];
-      $data  = $_POST["data"];
-      $hora  = $_POST["hora"];
-      $mot   = $_POST["motivo"];
+      $id       = $_POST["id"];
+      $pac      = $_POST["idpaciente"];
+      $prof     = $_POST["idprofissional"];
+      $data     = $_POST["data"];
+      $hora     = $_POST["hora"];
+      $mot      = $_POST["motivo"];
       $idarea   = $_POST["idarea"];
       
       $sql = "UPDATE tb_agendamento SET idpaciente='" . $pac . "', 
@@ -35,12 +35,12 @@
       $result = mysqli_query($link, $sql);
       while($linhaTabela = mysqli_fetch_array($result)) {
         
-        $pac   = $linhaTabela[1];
-        $prof  = $linhaTabela[2];
-        $data  = $linhaTabela[3];
-        $hora  = date("H:i", strtotime($linhaTabela[4]));
-        $mot   = $linhaTabela[5];
-        $area  = $linhaTabela[6];
+        $pac      = $linhaTabela[1];
+        $prof     = $linhaTabela[2];
+        $data     = $linhaTabela[3];
+        $hora     = date("H:i", strtotime($linhaTabela[4]));
+        $mot      = $linhaTabela[5];
+        $idarea   = $linhaTabela[6];
       }
     }
 ?>
@@ -107,22 +107,27 @@
                 <label for="name">Área do atendimento:</label>
                 <select class="form-control browser-default custom-select" 
                         name="idarea" style="width: 100%;">
-                    <option selected>Selecione a área do atendimento</option>
                     <?php 
                       $sqlArea = "SELECT * FROM tb_area";
                       $resultado = mysqli_query($link, $sqlArea);
-                        while($linhaTabela = mysqli_fetch_array($resultado)){ ?>
-                          <option value="<?php echo $linhaTabela[0]; ?>"><?php echo $linhaTabela[1]; ?></option>
-                    <?php } ?>
+                        while($linhaTabela = mysqli_fetch_array($resultado)){ 
+                          if ( $idarea == $linhaTabela[0] ) {
+                            echo '<option value="' . $linhaTabela[0] . '" selected>' . $linhaTabela[1] . '</option>';
+                          }
+                          else {
+                            echo '<option value="' . $linhaTabela[0] . '" >' . $linhaTabela[1] . '</option>';
+                          }
+                        } 
+                    ?>
                 </select>  
             </div>
             <div class="form-group col-md-2" name="data">
                 <label for="name">Data:</label>
-                <input type="date" class="form-control" name="data">
+                <input type="date" class="form-control" name="data" value="<?php if ($data != '') { echo $data; } ?>">
             </div>
             <div class="form-group col-md-2" name="hora">
                 <label for="name">Hora:</label>
-                <input type="time" class="form-control" name="hora">
+                <input type="time" class="form-control" name="hora" value="<?php if ($hora != '') { echo $hora; } ?>">
             </div>
         </div>
         <div class="row">
