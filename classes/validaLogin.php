@@ -10,11 +10,10 @@ Class Usuario
         global $msgErro;
         try{
             $pdo = new PDO("mysql:dbname=".$nome.";host=".$host,$usuario,$senha);
-        } catch(PDOException $e)
-        {
+        } 
+        catch(PDOException $e){
             $msgErro = $e->getMessage();
         }
-
     }
 
     public function cadastrar($nome, $email, $senha)
@@ -24,41 +23,40 @@ Class Usuario
         $sql = $pdo->prepare("SELECT id_usuario FROM tb_login WHERE email_usuario = :e");
         $sql->bindValue(":e",$email);
         $sql->execute();
+        
         if($sql->rowCount() > 0){
             return false;
-        }else{
-        //caso não, cadastrar
-        $sql = $pdo->prepare("INSERT INTO tb_login (nome_usuario, email_usuario, senha_usuario) 
-            VALUES (:n, :e, :s)");
-        $sql->bindValue(":n",$nome);
-        $sql->bindValue(":e",$email);
-        $sql->bindValue(":s",md5($senha));
-        $sql->execute();
-        return true;
+        }
+        else{
+            //caso não, cadastrar
+            $sql = $pdo->prepare("INSERT INTO tb_login (nome_usuario, email_usuario, senha_usuario) 
+                VALUES (:n, :e, :s)");
+            $sql->bindValue(":n",$nome);
+            $sql->bindValue(":e",$email);
+            $sql->bindValue(":s",md5($senha));
+            $sql->execute();
+            return true;
         }
     }
 
     public function logar($email, $senha)
     {
         global $pdo;
-        
         $sql = $pdo->prepare("SELECT id_usuario FROM tb_login 
             WHERE email_usuario = :e AND senha_usuario = :s");
         $sql->bindValue(":e",$email);
         $sql->bindValue(":s",md5($senha));
         $sql->execute();
-        if($sql->rowCount() > 0)
-        {
+        
+        if($sql->rowCount() > 0){
             $dado = $sql->fetch();
             session_start();
             $_SESSION['id_usuario'] = $dado['id_usuario'];
             return true;
         }
-        else
-        {
+        else{
             return false;
         }
-
     }
 }
 ?>  

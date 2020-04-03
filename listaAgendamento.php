@@ -43,15 +43,19 @@
 						<td class="table-active"><?php echo date("d/m/Y", strtotime($linhaTabela[3])); ?></td>
 						<td class="table-active"><?php echo date("H:i", strtotime($linhaTabela[4])); ?></td>
 						<td class="table-active">
-							<a href="exibeAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-success btn-sm">	Exibir</button></a>
+							<a href="exibeAgendamento.php?id=<?php echo($linhaTabela[0]) ?>">
+								<button type="button" class="btn btn-success btn-sm">	Exibir</button>
+							</a>
 						</td>
 						<td class="table-active">
-							<a href="alteraAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-warning btn-sm">
-								Editar</button></a>
+							<a href="alteraAgendamento.php?id=<?php echo($linhaTabela[0]) ?>">
+								<button type="button" class="btn btn-warning btn-sm">Editar</button>
+							</a>
 						</td>
 						<td class="table-active">	
-							<a href="apagaAgendamento.php?id=<?php echo($linhaTabela[0]) ?> "><button type="button" class="btn btn-danger btn-sm">
-								Apagar</button></a>
+							<a href="apagaAgendamento.php?id=<?php echo($linhaTabela[0]) ?>">
+								<button type="button" class="btn btn-danger btn-sm">Apagar</button>
+							</a>
 						</td>
 					</tr>
 				<?php } ?>

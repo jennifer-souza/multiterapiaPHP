@@ -37,7 +37,10 @@
                     <input type="password" class="form-control" name="confSenha" required>
                   </div>
                 </div>
-                    <input type="submit" class="btn btn-lg btn-success btn-block" value="Cadastrar" name="cadastrar">
+                  <input type="submit" class="btn btn-lg btn-success btn-block" value="Cadastrar" name="cadastrar">
+                  <div  style="padding-left: 45%;">
+                    <a href="index.php" class="badge badge-primary">Logar</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -49,9 +52,9 @@
       if(isset($_POST['nome_usuario']))
         {
           //addslashes impede comandos maliciosos para hackear sites
-        $nome = addslashes($_POST['nome_usuario']);
-        $email = addslashes($_POST['email_usuario']);
-        $senha = addslashes($_POST['senha_usuario']);
+        $nome           = addslashes($_POST['nome_usuario']);
+        $email          = addslashes($_POST['email_usuario']);
+        $senha          = addslashes($_POST['senha_usuario']);
         $confirmarSenha = addslashes($_POST['confSenha']);
 
         //verifica se está preenchido
@@ -69,7 +72,6 @@
                   ?>
                     <div id="msg-sucesso">
                       Cadastrado com sucesso! Faça o login para entrar. 
-                        <a href="index.php"><strong>Clique aqui!</strong></a>
                     </div>
                   <?php
                 }
@@ -103,11 +105,11 @@
           }
           else
           {
-              ?>
-                <div class="msg-erro">
-                  Preencha todos os campos!
-                </div>
-              <?php
+            ?>
+              <div class="msg-erro">
+                Preencha todos os campos!
+              </div>
+            <?php
           }
         }
       ?>

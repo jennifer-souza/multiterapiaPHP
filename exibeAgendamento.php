@@ -29,7 +29,7 @@
 <body>
 <?php include('header.html'); ?>
     <form action="exibeAgendamento.php" class="prof" method="_GET">
-        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Agendamento - <?php echo $pac; ?></h2>
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Detalhar agendamento</h2>
         <hr class="col-md-8" />
         <input type="hidden" value="<?php echo $id; ?>" name="id">
         <div class="row">

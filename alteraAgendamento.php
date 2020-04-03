@@ -139,7 +139,9 @@
         <hr class="col-md-8" />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
             <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-danger" value="Cancelar">
+              <a href="listaAgendamento.php">
+                <input type="submit" class="btn btn-danger" value="Cancelar">
+              </a>
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">

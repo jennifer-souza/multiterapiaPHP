@@ -37,8 +37,7 @@
     <body>
     <?php include('header.html'); ?>
         <form action="exibePaciente.php" class="prof" method="_GET">
-            <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Paciente > 
-                <?php echo $nome; ?></h2>
+            <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Detalhar paciente</h2>
             <hr class="col-md-8" />
             <input type="hidden" value="<?php echo $id; ?>" name="id_paciente">
             <div class="row">

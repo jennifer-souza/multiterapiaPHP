@@ -125,7 +125,7 @@
         <hr class="col-md-8" />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 45%;">
             <div class="btn-group mr-2" role="group">
-              <a href="listaProfissional.php ?> ">
+              <a href="listaProfissional.php">
                 <input type="button" class="btn btn-danger" value="Cancelar">
               </a>  
             </div>

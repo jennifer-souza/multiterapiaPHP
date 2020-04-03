@@ -31,7 +31,7 @@
   <body>
     <?php include('header.html'); ?>
     <form action="exibeProfissional.php" class="prof" method="_GET">
-        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Profissional > <?php echo $nome; ?></h2>
+        <h2 class="border border-secondary rounded bg-secondary text-white col-md-8">Detalhar profissional</h2>
         <hr class="col-md-8" />
         <input type="hidden" value="<?php echo $id; ?>" name="id_profissional">
         <div class="row">

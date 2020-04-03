@@ -45,7 +45,6 @@
                 <label for="name">Nome:</label>
                 <input type="text" class="form-control" name="nome_profissional">
             </div>
-
         </div>
         <div class="row">
             <div class="form-group col-md-4" name="idarea">
@@ -97,7 +96,9 @@
         <hr class="col-md-8" />
         <div class="row btn-toolbar" role="toolbar" style="padding-left: 50%;">
             <div class="btn-group mr-2" role="group">
-              <input type="submit" class="btn btn-danger" value="Cancelar">
+              <a href="listaProfissional.php">  
+                <input type="submit" class="btn btn-danger" value="Cancelar">
+              </a>
             </div>
             <div class="btn-group mr-2" role="group">
               <input type="submit" class="btn btn-success" value="Salvar">

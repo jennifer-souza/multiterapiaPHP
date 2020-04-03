@@ -43,43 +43,43 @@
         $email = addslashes($_POST['email_usuario']);
         $senha = addslashes($_POST['senha_usuario']);
 
-          //verifica se está preenchido
-          if(!empty($email) && !empty($senha))
-          {
-              $u->conectar("mdata","localhost","root","");
+        //verifica se está preenchido
+        if(!empty($email) && !empty($senha))
+        {
+            $u->conectar("mdata","localhost","root","");
 
-              if($u->msgErro == "")
+            if($u->msgErro == "")
+            {
+              if($u->logar($email,$senha))
               {
-                if($u->logar($email,$senha))
-                {
-                    header("location: home.php");
-                }
-                else
-                {
-                  ?>
-                    <div class="msg-erro">
-                      Email e/ou senha estão incorretos!
-                    </div>
-                  <?php
-                }
+                  header("location: home.php");
               }
               else
               {
                 ?>
                   <div class="msg-erro">
-                    <?php echo "Erro: ".$u->msgErro; ?>
+                    Email e/ou senha estão incorretos!
                   </div>
                 <?php
               }
-          }
-          else
-          {
-            ?>
-              <div class="msg-erro">
-                Preecha os campos!
-              </div>
-            <?php
-          }
+            }
+            else
+            {
+              ?>
+                <div class="msg-erro">
+                  <?php echo "Erro: ".$u->msgErro; ?>
+                </div>
+              <?php
+            }
+        }
+        else
+        {
+          ?>
+            <div class="msg-erro">
+              Preecha os campos!
+            </div>
+          <?php
+        }
       }
     ?>
   </body>

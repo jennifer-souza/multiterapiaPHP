@@ -1,8 +1,8 @@
 <?php 
 
 	include('classes/conexao.php');
-	$id = $_GET['id'];
-	$sql = "DELETE FROM tb_profissional WHERE id_profissional = " . $id;
+	$id 	= $_GET['id'];
+	$sql	= "DELETE FROM tb_profissional WHERE id_profissional = " . $id;
 	mysqli_query($link, $sql);
 
 ?>
